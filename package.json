@@ -20,5 +20,6 @@
     "eslint-plugin-react": "^7.24.0",
     "postcss": "^8.2.15",
     "tailwindcss": "^2.1.2"
-  }
+  },
+  "license": "UNLICENSED"
 }
