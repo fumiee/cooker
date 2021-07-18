@@ -7,7 +7,7 @@ export const Headline = () => {
       <Head>
         <title>料理系youtuberまとめ</title>
       </Head>
-      <Link href="/cooker">
+      <Link href="/">
         <header className="flex items-center justify-center h-14 text-2xl font-serif tracking-wider">
           料理系 YouTuber
           <img
