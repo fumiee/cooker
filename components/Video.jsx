@@ -1,5 +1,4 @@
-/* eslint-disable react/react-in-jsx-scope */
-import { Button } from "components/button";
+import { Button } from "components/Button";
 import { useEffect, useState } from "react";
 import { callApi } from "utils/api";
 const BASE_URL = `https://www.youtube.com/embed/`;
