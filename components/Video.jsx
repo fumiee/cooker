@@ -74,10 +74,7 @@ export const Video = (props) => {
           </div>
         );
       })}
-      <button
-        className="text-gray-400 flex justify-center items-center"
-        onClick={loadMore}
-      >
+      <button className="text-gray-400 " onClick={loadMore}>
         もっと見る
       </button>
     </div>
