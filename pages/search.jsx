@@ -1,21 +1,24 @@
 import { Headline } from "components/Headline";
 import { Nav } from "components/Nav";
 import { Video } from "components/Video";
+import { useRef } from "react";
 const { useState, useCallback, useMemo } = require("react");
 
 const search = () => {
-  const [count, setCount] = useState(0);
-  const [text, setText] = useState("");
-  const [addText, setAddText] = useState("");
-  const params = useMemo(() => {
-    return { q: { text } };
-  }, [count]);
   const req = "search";
-  const add = useCallback(() => {
-    setText(addText);
-    setCount(count + 1);
-    console.log(count, addText);
-  }, []);
+  const [keyWord, setKeyWord] = useState("");
+  const [isShow, setIsShow] = useState(false);
+
+  const textRef = useRef(null);
+  const params = useMemo(() => {
+    return { q: keyWord };
+  }, [keyWord]);
+
+  const handleChange = useCallback(() => {
+    const text = textRef.current.value;
+    setKeyWord(text + " レシピ");
+    setIsShow(true);
+  }, [keyWord]);
 
   return (
     <div className="min-h-screen font-serif text-gray-600">
@@ -23,23 +26,24 @@ const search = () => {
       <div className="sticky top-0 z-50">
         <Nav />
       </div>
-      <h1 className="flex justify-center items-center text-xl h-10">
+      <h1 className="flex justify-center items-center text-xl my-4">
         キーワード検索
       </h1>
-      <div className="justify-center flex my-5">
+      <div className="justify-center flex mb-6">
         <input
           className="border w-4/6"
           type="text"
-          onChange={(e) => {
-            setAddText(e.target.value);
-            console.log(addText);
-          }}
+          ref={textRef}
+          // onChange={InputWordChange}
         />
-        <button className="border bg-gray-200" onClick={add}>
-          検索
-        </button>
+        <input
+          className="border bg-gray-200"
+          type="submit"
+          value="検索"
+          onClick={handleChange}
+        />
       </div>
-      <Video params={params} req={req} />;
+      {isShow ? <Video params={params} req={req} /> : null}
     </div>
   );
 };
