@@ -22,7 +22,7 @@ const YoutuberCaptions1 = [
 const YoutuberCaptions2 = ["てぬキッチン", "エプロン", "あおにーな"];
 
 const YoutuberCaptions3 = ["リュウジ", "コウケンテツ", "栗原心平"];
-const Home = () => {
+const Youtuber = () => {
   return (
     <div className="min-h-screen font-serif text-gray-600 ">
       <Headline />
@@ -40,4 +40,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Youtuber;

@@ -20,14 +20,13 @@ const YoutuberCaptions = [
 
 const Home = () => {
   const params = {
-    part: "snippet",
-    q: "夏　レシピ 簡単", //検索クエリ
+    q: "夏　レシピ 簡単",
   };
-  const req = "search"; //HTTPリクエストの最後
+  const req = "search";
 
   return (
     <div>
-      <div className="min-h-screen font-serif text-gray-600">
+      <div className="min-h-screen max-w-3xl  m-auto font-serif text-gray-600">
         <Headline />
         <div className="sticky top-0 z-50">
           <Nav />

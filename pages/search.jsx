@@ -30,12 +30,7 @@ const search = () => {
         キーワード検索
       </h1>
       <div className="justify-center flex mb-6">
-        <input
-          className="border w-4/6"
-          type="text"
-          ref={textRef}
-          // onChange={InputWordChange}
-        />
+        <input className="border w-4/6" type="text" ref={textRef} />
         <input
           className="border bg-gray-200"
           type="submit"

@@ -33,7 +33,7 @@ const vesiCaptions = [
   "秋野菜",
   "冬野菜",
 ];
-const Home = () => {
+const Food = () => {
   return (
     <div className="min-h-screen font-serif text-gray-600 ">
       <Headline />
@@ -49,4 +49,4 @@ const Home = () => {
     </div>
   );
 };
-export default Home;
+export default Food;

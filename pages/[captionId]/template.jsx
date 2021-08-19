@@ -4,9 +4,8 @@ import { Video } from "components/Video";
 
 export const Template = () => {
   const router = useRouter();
-  const params = { q: router.query.captionId + "レシピ" };
-  const req = "search"; //HTTPリクエストの最後
-
+  const req = "search";
+  const params = { q: router.query.captionId + " レシピ" };
   return (
     <div className="font-serif">
       <div className="sticky top-0 z-50">
