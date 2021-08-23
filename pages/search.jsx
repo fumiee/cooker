@@ -1,13 +1,15 @@
 import { Headline } from "components/Headline";
 import { Nav } from "components/Nav";
 import { Video } from "components/Video";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { callApi } from "utils/CallApi";
 const { useState, useCallback, useMemo } = require("react");
 
 const search = () => {
   const req = "search";
   const [keyWord, setKeyWord] = useState("");
   const [isShow, setIsShow] = useState(false);
+  const [data, setData] = useState([]);
 
   const textRef = useRef(null);
   const params = useMemo(() => {
@@ -18,6 +20,11 @@ const search = () => {
     const text = textRef.current.value;
     setKeyWord(text + " レシピ");
     setIsShow(true);
+  }, [keyWord]);
+
+  useEffect(async () => {
+    const api = await callApi(params, req);
+    setData(api);
   }, [keyWord]);
 
   return (
@@ -38,7 +45,7 @@ const search = () => {
           onClick={handleChange}
         />
       </div>
-      {isShow ? <Video params={params} req={req} /> : null}
+      {isShow ? <Video videoData={data} /> : null}
     </div>
   );
 };

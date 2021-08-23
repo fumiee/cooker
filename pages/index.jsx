@@ -2,6 +2,9 @@ import { Caption } from "components/Caption";
 import { Headline } from "components/Headline";
 import { Nav } from "components/Nav";
 import { Video } from "components/Video";
+import { useState } from "react";
+import { useEffect } from "react";
+import { callApi } from "utils/CallApi";
 
 const FoodCaptions = [
   "鶏もも肉",
@@ -19,7 +22,14 @@ const YoutuberCaptions = [
 ];
 
 const Home = () => {
+  const [data, setData] = useState([]);
+  useEffect(async () => {
+    const api = await callApi(params, req);
+    setData(api);
+  }, []);
+
   const params = {
+    part: "snippet",
     q: "夏　レシピ 簡単",
   };
   const req = "search";
@@ -31,21 +41,18 @@ const Home = () => {
         <div className="sticky top-0 z-50">
           <Nav />
         </div>
-        <div className="space-y-1">
+        <div className="space-y-1 h-[75px]">
           <Caption captions={FoodCaptions} type="food" />
           <Caption captions={YoutuberCaptions} type="youtuber1" />
         </div>
+        <p className="border-t-2 border-gray-400 border-dashed"></p>
 
-        <main className="mt-5">
-          <div className="space-y-2">
-            <p className="border-t-2 border-gray-400 border-dashed"></p>
-            <h1 className="flex justify-center items-center text-xl h-10">
-              おすすめ動画
-            </h1>
-          </div>
-          <div className="space-y-3 mt-2"></div>
+        <main>
+          <h1 className="flex justify-center items-center text-xl h-16">
+            おすすめ動画
+          </h1>
         </main>
-        <Video params={params} req={req} />
+        <Video videoData={data} />
       </div>
     </div>
   );

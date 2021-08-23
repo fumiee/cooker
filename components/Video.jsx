@@ -1,52 +1,10 @@
 import { Button } from "components/Button";
-import { useEffect, useState } from "react";
-import { callApi } from "utils/api";
 const BASE_URL = `https://www.youtube.com/embed/`;
 
 export const Video = (props) => {
-  const [texts, setTexts] = useState([]);
-  const [pages, setPages] = useState();
-
-  const fetchData = async () => {
-    try {
-      const searchData = await callApi(props.params, props.req);
-      const videoIds = searchData?.items.map((item) => item.id.videoId);
-      const videoData = await callApi(
-        { id: videoIds.join(","), part: "snippet,id" },
-        "videos"
-      );
-      setPages(searchData.nextPageToken);
-      setTexts([...texts, ...videoData.items]);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const loadMore = async () => {
-    try {
-      const pageToken = pages;
-      const searchData = await callApi(
-        { ...props.params, pageToken },
-        props.req
-      );
-      const videoIds = searchData?.items.map((item) => item.id.videoId);
-      const videoData = await callApi(
-        { id: videoIds.join(","), part: "snippet,id" },
-        "videos"
-      );
-      setTexts([...texts, ...videoData.items]);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
     <div className="space-y-4">
-      {texts.map((item) => {
+      {props.videoData.items?.map((item) => {
         return (
           <div key={item.etag} className="border-8 border-gray-400 rounded-xl">
             <div className=" bg-gray-400 text-white border-b-4 border-gray-400">
@@ -74,9 +32,9 @@ export const Video = (props) => {
           </div>
         );
       })}
-      <button className="text-gray-400 " onClick={loadMore}>
+      {/* <button className="text-gray-400 " onClick={loadMore}>
         もっと見る
-      </button>
+      </button> */}
     </div>
   );
 };
