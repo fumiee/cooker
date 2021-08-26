@@ -25,7 +25,7 @@ const Home = () => {
   const [data, setData] = useState([]);
   useEffect(async () => {
     const api = await callApi(params, req);
-    setData(api);
+    setData(api.items);
   }, []);
 
   const params = {
@@ -52,7 +52,7 @@ const Home = () => {
             おすすめ動画
           </h1>
         </main>
-        <Video videoData={data} />
+        <Video items={data} />
       </div>
     </div>
   );

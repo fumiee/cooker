@@ -4,7 +4,7 @@ const BASE_URL = `https://www.youtube.com/embed/`;
 export const Video = (props) => {
   return (
     <div className="space-y-4">
-      {props.videoData.items?.map((item) => {
+      {props.items?.map((item) => {
         return (
           <div key={item.etag} className="border-8 border-gray-400 rounded-xl">
             <div className=" bg-gray-400 text-white border-b-4 border-gray-400">

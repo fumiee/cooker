@@ -41,7 +41,7 @@ const Fav = () => {
   }, []);
 
   return (
-    <div className="min-h-screen font-serif text-gray-600 ">
+    <div className="min-h-screen max-w-3xl  m-auto font-serif text-gray-600 ">
       <Headline />
       <div className="sticky top-0 z-50">
         <Nav />

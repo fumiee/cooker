@@ -24,7 +24,7 @@ const YoutuberCaptions2 = ["てぬキッチン", "エプロン", "あおにー�
 const YoutuberCaptions3 = ["リュウジ", "コウケンテツ", "栗原心平"];
 const Youtuber = () => {
   return (
-    <div className="min-h-screen font-serif text-gray-600 ">
+    <div className="min-h-screen max-w-3xl  m-auto font-serif text-gray-600 ">
       <Headline />
       <Nav />
       <div className="space-y-2">

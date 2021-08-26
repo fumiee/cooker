@@ -1,7 +1,7 @@
 export const callApi = async (params, req) => {
   const newParams = {
     ...params,
-    maxResults: "1",
+    maxResults: "8",
     key: process.env.NEXT_PUBLIC_YOUTUBE_API_KEY,
   };
 
@@ -15,7 +15,7 @@ export const callApi = async (params, req) => {
   const newParams2 = {
     id: videoIds.join(","),
     part: "snippet,id",
-    maxResults: "1",
+    maxResults: "8",
     key: process.env.NEXT_PUBLIC_YOUTUBE_API_KEY,
   };
   const req2 = "videos";

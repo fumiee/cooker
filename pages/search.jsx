@@ -1,34 +1,46 @@
 import { Headline } from "components/Headline";
 import { Nav } from "components/Nav";
 import { Video } from "components/Video";
-import { useEffect, useRef } from "react";
+import { useCallback, useReducer } from "react";
 import { callApi } from "utils/CallApi";
-const { useState, useCallback, useMemo } = require("react");
 
-const search = () => {
-  const req = "search";
-  const [keyWord, setKeyWord] = useState("");
-  const [isShow, setIsShow] = useState(false);
-  const [data, setData] = useState([]);
+const initialState = {
+  keyword: "",
+  data: [],
+};
 
-  const textRef = useRef(null);
-  const params = useMemo(() => {
-    return { q: keyWord };
-  }, [keyWord]);
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "input":
+      return {
+        ...state,
+        keyword: action.keyword,
+      };
+    case "get":
+      return {
+        ...state,
+        data: action.data,
+      };
+    default:
+      throw new Error("no such action type!");
+  }
+};
 
-  const handleChange = useCallback(() => {
-    const text = textRef.current.value;
-    setKeyWord(text + " レシピ");
-    setIsShow(true);
-  }, [keyWord]);
+const Search = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  useEffect(async () => {
-    const api = await callApi(params, req);
-    setData(api);
-  }, [keyWord]);
+  const handleChange = useCallback((e) => {
+    dispatch({ type: "input", keyword: e.target.value });
+  }, []);
+
+  const handleClick = useCallback(async () => {
+    const api = await callApi({ q: `${state.keyword} レシピ` }, "search");
+    dispatch({ type: "get", data: api.items });
+  }, [state.keyword]);
+  console.log("foo");
 
   return (
-    <div className="min-h-screen font-serif text-gray-600">
+    <div className="min-h-screen max-w-3xl  m-auto font-serif text-gray-600">
       <Headline />
       <div className="sticky top-0 z-50">
         <Nav />
@@ -37,16 +49,22 @@ const search = () => {
         キーワード検索
       </h1>
       <div className="justify-center flex mb-6">
-        <input className="border w-4/6" type="text" ref={textRef} />
         <input
-          className="border bg-gray-200"
-          type="submit"
-          value="検索"
-          onClick={handleChange}
+          className="border w-4/6"
+          type="text"
+          value={state.keyword}
+          onChange={handleChange}
         />
+        <button
+          className="border bg-gray-200"
+          type="button"
+          onClick={handleClick}
+        >
+          検索
+        </button>
       </div>
-      {isShow ? <Video videoData={data} /> : null}
+      {state.data.length > 0 ? <Video items={state.data} /> : null}
     </div>
   );
 };
-export default search;
+export default Search;
