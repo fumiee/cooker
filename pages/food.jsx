@@ -35,7 +35,7 @@ const vesiCaptions = [
 ];
 const Food = () => {
   return (
-    <div className="min-h-screen max-w-3xl  m-auto font-serif text-gray-600 ">
+    <div>
       <Headline />
       <Nav />
       <div className="space-y-2">

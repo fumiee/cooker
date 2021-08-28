@@ -36,7 +36,7 @@ const Home = () => {
 
   return (
     <div>
-      <div className="min-h-screen max-w-3xl  m-auto font-serif text-gray-600">
+      <div>
         <Headline />
         <div className="sticky top-0 z-50">
           <Nav />
